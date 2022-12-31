@@ -42,7 +42,7 @@ class Rating(Csv):
         if not os.path.exists(output_dir_path):
             os.mkdir(output_dir_path)
         return output_dir_path
-    
+
     def find_ratings(self):
         """csvファイルのパスを作成
         Returns:
@@ -85,7 +85,7 @@ class Rating(Csv):
             )
 
         return self.data
-    
+
     def update(self, team, rating):
         """レイティングをアップデータします
         Args:
@@ -95,6 +95,13 @@ class Rating(Csv):
         self.data.at[team, RATING_COLUMN_RATING] = rating
         return self.data
 
+    def save(self):
+        """レイティング情報を保存"""
+        self.data.to_csv(self.csv_file, header=True, index=True)
+
+    def delete(self):
+        """レイティングのcsvファイルを削除"""
+        os.remove(self.csv_file)
 
     def get_rating(self, team):
         """チームのレイティングを返します
@@ -104,7 +111,7 @@ class Rating(Csv):
             float: 引数のチームのレイティング
         """
         return self.data.at[team, RATING_COLUMN_RATING]
-    
+
     def rating_info(self):
         """レイティング情報を描画"""
         df = self.data
