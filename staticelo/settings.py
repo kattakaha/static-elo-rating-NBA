@@ -16,6 +16,11 @@ INPUT_DIR = "input"
 OUTPUT_DIR = "output"
 
 
+# views.console
+TEMPLATE_DIR = "templates"
+TEMPLATE_PATH = os.path.join(BASE_DIR, TEMPLATE_DIR)
+
+
 # Game
 GAME_COLUMN_DATE = "DATE"
 GAME_COLUMN_HOME = "HOME"
