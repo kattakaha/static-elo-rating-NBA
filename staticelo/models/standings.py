@@ -128,11 +128,15 @@ class Standings(Csv):
             pandas.DataFrame: 勝敗情報をpandas.DataFrameで返します
         """
         self.load_data()
+        # 試合数をインクリメント
         self.data.at[opponent, STANDING_COLUMN_N] += 1
+        # 勝者が対戦相手でないなら; 自分が勝ったら
         if winner != opponent:
             self.data.at[opponent, STANDING_COLUMN_LOSE] += 1
         else:
             self.data.at[opponent, STANDING_COLUMN_WIN] += 1
+        
+        # 勝率を計算
         self.data.at[opponent, STANDING_COLUMN_WP] = self._calc_wp(opponent)
         self.save()
         return self.data
