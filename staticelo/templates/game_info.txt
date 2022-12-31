@@ -1,0 +1,2 @@
+$index | date: $date
+$home vs $away | $hscore - $ascore

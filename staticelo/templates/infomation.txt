@@ -1,0 +1,5 @@
+INFOMATION
+------------------------------------------------------------
+season              :   $season
+K-factor            :   $K
+logistics parameter :   $XI
