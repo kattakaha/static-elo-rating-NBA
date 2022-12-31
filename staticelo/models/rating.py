@@ -48,7 +48,7 @@ class Rating(Csv):
         Returns:
             str: csvファイルのパスを返す
         """
-        output_dir_path = self._get_csv_file_path()
+        output_dir_path = self._get_output_dir_path()
         filename = self.season + "_K" + str(self.K) + "_rating.csv"
         csv_file = os.path.join(output_dir_path, filename)
         return csv_file
@@ -84,6 +84,15 @@ class Rating(Csv):
                 )
             )
 
+        return self.data
+    
+    def update(self, team, rating):
+        """レイティングをアップデータします
+        Args:
+            team (str)      : チーム名
+            rating(float)   : 新しいレイティング
+        """
+        self.data.at[team, RATING_COLUMN_RATING] = rating
         return self.data
 
 

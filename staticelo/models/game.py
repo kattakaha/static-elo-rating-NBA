@@ -26,7 +26,7 @@ class Game(object):
         self.data = []
         self.load_data()
 
-    def _get_csv_file_path(self):
+    def get_csv_file_path(self):
         """csvファイルのパスを作成
         Return:
             str: csvファイルのパスを返すs

@@ -4,7 +4,7 @@ from staticelo.models.rating import Rating
 from staticelo.models.game import Game, game_info
 from staticelo.models.team import Team
 
-from adaptiveelo.views import console
+from staticelo.views import console
 
 from staticelo.settings import TEAMS
 from staticelo.settings import (
@@ -35,7 +35,7 @@ class StaticElo(object):
         self.K = K
         self.XI = XI
         self.games = Game(season=self.season)
-        self.ratings = Rating(season=self.season)
+        self.ratings = Rating(season=self.season, K=K)
 
     def infomation(self):
         """Eloレイティングの基本情報を描画"""

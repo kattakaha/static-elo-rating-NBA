@@ -116,7 +116,7 @@ class Standings(Csv):
             float: 対戦相手の勝率
         """
         n = self.data.at[opponent, STANDING_COLUMN_N]
-        w = self.data.at[STANDING_COLUMN_WIN]
+        w = self.data.at[opponent, STANDING_COLUMN_WIN]
         return float(w/n)
     
     def update(self, opponent, winner):
