@@ -14,12 +14,17 @@ class Game(object):
     """試合情報のクラス"""
 
     def __init__(self, season, csv_file=None, *args, **kwargs):
+        """コンストラクタ
+        Args:
+            season (str): シーズンの開始年度 e.g:"2021"
+            csv_file (str): csvのファイルパス
+        """
         self.season = season
         self.csv_file = self.get_csv_file_path()
         self.data = []
         self.load_data()
 
-    def get_csv_file_path(self):
+    def _get_csv_file_path(self):
         """csvファイルのパスを作成
         Return:
             str: csvファイルのパスを返すs
