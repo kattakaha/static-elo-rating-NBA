@@ -2,6 +2,8 @@ import csv
 import os
 import pandas
 
+from staticelo.views import console
+
 from staticelo.settings import INPUT_DIR
 from staticelo.settings import GAME_COLUMN_HOME_SCORE, GAME_COLUMN_AWAY_SCORE
 
@@ -54,3 +56,20 @@ class Game(object):
             })
         
         return self.data
+
+
+def game_info(index, game):
+    """試合情報を描画"""
+    template = console.get_template("game_info.txt", color="yellow")
+    print(
+        template.substitute(
+            {
+                "index": index,
+                "date": game["DATE"],
+                "home": game["HOME"],
+                "away": game["AWAY"],
+                "hscore": game["HSCORE"],
+                "ascore": game["ASCORE"],
+            }
+        )
+    )
