@@ -26,8 +26,20 @@ class Standings(Csv):
     """csvモデルから継承した勝敗情報のクラス"""
 
     def __init__(self, season, name, csv_file=None, *args, **kwargs):
+        """コンストラクタ
+        Args:
+            season (str)    : シーズンの開始年度 e.g: "2021"
+            name (str)      : チーム名
+            csv_file (str)  : csvのファイルパス
+        """
         self.season = season
         self.name = name
+        self.csv_file = self.find_standings()
+        if not os.path.exists(self.csv_file):
+            super().__init__(self.csv_file, *args, **kwargs)
+            self.init_standings()
+        self.data = []
+        self.load_data()
 
     def _get_output_dir_path(self):
         """アウトプットディレクトリのパスを作成
