@@ -13,8 +13,15 @@ INITIAL_RATING = 1500.0
 class Rating(Csv):
     """csvモデルを継承したレイティングのモデル"""
 
-    def __init__(self, season, csv_file=None, *args, **kwargs):
+    def __init__(self, season, K, csv_file=None, *args, **kwargs):
+        """コンストラクタ
+        Args:
+            season (str)    : シーズンの開始年度 e.g: "2021"
+            K (int)         : K因子定数
+            csv_file (str)  : csvのファイルパス
+        """
         self.season = season
+        self.K = K
         self.csv_file = self.find_ratings()
 
         # csvファイルが存在しない場合
@@ -34,8 +41,17 @@ class Rating(Csv):
         # ディレクトリが存在しない場合
         if not os.path.exists(output_dir_path):
             os.mkdir(output_dir_path)
-
         return output_dir_path
+    
+    def find_ratings(self):
+        """csvファイルのパスを作成
+        Returns:
+            str: csvファイルのパスを返す
+        """
+        output_dir_path = self._get_csv_file_path()
+        filename = self.season + "_K" + str(self.K) + "_rating.csv"
+        csv_file = os.path.join(output_dir_path, filename)
+        return csv_file
 
     def init_ratings(self):
         """レイティングのデータを初期化"""
