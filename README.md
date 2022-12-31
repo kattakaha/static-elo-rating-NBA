@@ -1,7 +1,6 @@
 # static-elo-rating-NBA
 
 ![AUR last modified](https://img.shields.io/aur/last-modified/google-chrome)
-![APM](https://img.shields.io/apm/l/vim-mode?style=plastic)
 
 NBAのシーズンを通してK因子固定のElo-rating
 
