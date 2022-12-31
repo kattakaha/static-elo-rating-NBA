@@ -104,3 +104,9 @@ class Rating(Csv):
             float: 引数のチームのレイティング
         """
         return self.data.at[team, RATING_COLUMN_RATING]
+    
+    def rating_info(self):
+        """レイティング情報を描画"""
+        df = self.data
+        for team, rating in df.iterrows():
+            print(team, rating[RATING_COLUMN_RATING])
