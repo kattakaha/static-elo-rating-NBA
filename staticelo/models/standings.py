@@ -1,6 +1,6 @@
 import csv
 import os
-
+import pandas
 
 from staticelo.models.csv import Csv
 from staticelo.settings import OUTPUT_DIR, TEAMS
@@ -42,6 +42,93 @@ class Standings(Csv):
         return output_dir_path
 
     def find_standings(self):
+        """csvファイルのパスを作成
+        Returns:
+            str: csvファイルのパスを返す
+        """
         output_dir_path = self._get_output_dir_path()
         filename = self.name + ".csv"
         csv_file = os.path.join(output_dir_path, filename)
+        return csv_file
+
+    def init_standings(self):
+        """勝敗情報を初期化"""
+        df = pandas.DataFrame(
+            {
+                STANDING_COLUMN_TEAM: TEAMS,
+                STANDING_COLUMN_N: 0,
+                STANDING_COLUMN_WIN: 0,
+                STANDING_COLUMN_LOSE: 0,
+                STANDING_COLUMN_WP: 0.0,
+            }
+        )
+        df.to_csv(self.csv_file, header=True, index=False)
+
+    def load_data(self):
+        """csvファイルのデータを読み込みます
+        Returns:
+            pandas.DataFrame: standingsのデータをpandas.DataFrame型で返します.
+        """
+        dict_array = []
+        with open(self.csv_file, mode="r") as csv_file:
+            reader = csv.DictReader(csv_file)
+            for row in reader:
+                dict_array.append(
+                    {
+                        STANDING_COLUMN_TEAM: row[STANDING_COLUMN_TEAM],
+                        STANDING_COLUMN_N: int(row[STANDING_COLUMN_N]),
+                        STANDING_COLUMN_WIN: int(row[STANDING_COLUMN_WIN]),
+                        STANDING_COLUMN_LOSE: int(row[STANDING_COLUMN_LOSE]),
+                        STANDING_COLUMN_WP: float(row[STANDING_COLUMN_WP]),
+                    }
+                )
+            self.data = pandas.DataFrame(dict_array).set_index(STANDING_COLUMN_TEAM)
+        return self.data
+    
+    
+    def get_opponent_data(self, opponent):
+        """対戦相手の情報を取得します
+        Args:
+            opponent (str): 対戦相手のチーム名
+        Returns:
+            pandas.Series: 対戦相手の情報を返します
+        """
+        self.load_data()
+        return self.data.loc[opponent]
+    
+    def _calc_wp(self, opponent):
+        """対戦相手の勝率を計算します
+        Args:
+            opponent (str): 対戦相手のチーム名
+        Retuens:
+            float: 対戦相手の勝率
+        """
+        n = self.data.at[opponent, STANDING_COLUMN_N]
+        w = self.data.at[STANDING_COLUMN_WIN]
+        return float(w/n)
+    
+    def update(self, opponent, winner):
+        """standingsのデータをアップデートする
+        Args:
+            opponent(str): 対戦相手
+            winner(str): 試合の勝者
+        Retuens:
+            pandas.DataFrame: 勝敗情報をpandas.DataFrameで返します
+        """
+        self.load_data()
+        self.data.at[opponent, STANDING_COLUMN_N] += 1
+        if winner != opponent:
+            self.data.at[opponent, STANDING_COLUMN_LOSE] += 1
+        else:
+            self.data.at[opponent, STANDING_COLUMN_WIN] += 1
+        self.data.at[opponent, STANDING_COLUMN_WP] = self._calc_wp(opponent)
+        self.save()
+        return self.data
+    
+    def save(self):
+        """勝敗情報のcsvファイルを作成します"""
+        self.data.to_csv(self.csv_file, header=True, index=True)
+    
+    def delete(self):
+        """勝敗情報のcsvファイルを削除します"""
+        os.remove(self.csv_file)
