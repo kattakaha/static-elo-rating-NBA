@@ -81,20 +81,14 @@ class Standings(Csv):
         Returns:
             pandas.DataFrame: standingsのデータをpandas.DataFrame型で返します.
         """
-        dict_array = []
-        with open(self.csv_file, mode="r") as csv_file:
-            reader = csv.DictReader(csv_file)
-            for row in reader:
-                dict_array.append(
-                    {
-                        STANDING_COLUMN_TEAM: row[STANDING_COLUMN_TEAM],
-                        STANDING_COLUMN_N: int(row[STANDING_COLUMN_N]),
-                        STANDING_COLUMN_WIN: int(row[STANDING_COLUMN_WIN]),
-                        STANDING_COLUMN_LOSE: int(row[STANDING_COLUMN_LOSE]),
-                        STANDING_COLUMN_WP: float(row[STANDING_COLUMN_WP]),
-                    }
-                )
-            self.data = pandas.DataFrame(dict_array).set_index(STANDING_COLUMN_TEAM)
+        df = pandas.read_csv(self.csv_file)
+        df = df.set_index(STANDING_COLUMN_TEAM).astype({
+            STANDING_COLUMN_N: int,
+            STANDING_COLUMN_WIN: int,
+            STANDING_COLUMN_LOSE: int,
+            STANDING_COLUMN_WP: float,
+        })
+        self.data = df
         return self.data
     
     

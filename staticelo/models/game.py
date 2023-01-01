@@ -44,17 +44,11 @@ class Game(object):
         Retuerns:
             pandas.DataFrame: 試合データをpandas.DataFrameで返します
         """
-        dict_array = []
-        with open(self.csv_file, mode="r") as csv_file:
-            reader = csv.DictReader(csv_file)
-            for row in reader:
-                dict_array.append(row)
-            
-            self.data = pandas.DataFrame(dict_array).astype({
-                GAME_COLUMN_HOME_SCORE: int,
-                GAME_COLUMN_AWAY_SCORE: int,
-            })
-        
+        df = pandas.read_csv(self.csv_file).astype({
+            GAME_COLUMN_HOME_SCORE: int,
+            GAME_COLUMN_AWAY_SCORE: int,
+        })
+        self.data = df
         return self.data
 
 

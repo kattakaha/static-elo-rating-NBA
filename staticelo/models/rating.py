@@ -68,22 +68,11 @@ class Rating(Csv):
         Retuerns:
             pandas.DataFrame: 試合データをpandas.DataFrameで返します
         """
-        dict_array = []
-        with open(self.csv_file, mode="r") as csv_file:
-            reader = csv.DictReader(csv_file)
-            for row in reader:
-                dict_array.append(row)
-
-            self.data = (
-                pandas.DataFrame(dict_array)
-                .set_index(RATING_COLUMN_TEAM)
-                .astype(
-                    {
-                        RATING_COLUMN_RATING: float,
-                    }
-                )
-            )
-
+        df = pandas.read_csv(self.csv_file)
+        df = df.set_index(RATING_COLUMN_TEAM).astype({
+            RATING_COLUMN_RATING: float,
+        })
+        self.data = df
         return self.data
 
     def update(self, team, rating):
