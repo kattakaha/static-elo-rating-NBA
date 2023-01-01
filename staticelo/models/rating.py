@@ -40,7 +40,7 @@ class Rating(Csv):
         output_dir_path = os.path.join(OUTPUT_DIR, self.season)
         # ディレクトリが存在しない場合
         if not os.path.exists(output_dir_path):
-            os.mkdir(output_dir_path)
+            os.makedirs(output_dir_path)
         return output_dir_path
 
     def find_ratings(self):
