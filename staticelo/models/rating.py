@@ -66,7 +66,7 @@ class Rating(Csv):
     def load_data(self):
         """csvファイルのデータを読み込みます
         Retuerns:
-            pandas.DataFrame: 試合データをpandas.DataFrameで返します
+            pandas.DataFrame: レイティングのデータをpandas.DataFrameで返します
         """
         df = pandas.read_csv(self.csv_file)
         df = df.set_index(RATING_COLUMN_TEAM).astype({
@@ -76,7 +76,7 @@ class Rating(Csv):
         return self.data
 
     def update(self, team, rating):
-        """レイティングをアップデータします
+        """レイティングをアップデートします
         Args:
             team (str)      : チーム名
             rating(float)   : 新しいレイティング
