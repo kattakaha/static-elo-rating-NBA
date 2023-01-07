@@ -5,7 +5,13 @@ import pandas
 from staticelo.views import console
 
 from staticelo.settings import INPUT_DIR
-from staticelo.settings import GAME_COLUMN_HOME_SCORE, GAME_COLUMN_AWAY_SCORE
+from staticelo.settings import (
+    GAME_COLUMN_DATE,
+    GAME_COLUMN_HOME,
+    GAME_COLUMN_AWAY,
+    GAME_COLUMN_HOME_SCORE,
+    GAME_COLUMN_AWAY_SCORE,
+)
 
 
 class NoInputfileError(Exception):
@@ -59,11 +65,11 @@ def game_info(index, game):
         template.substitute(
             {
                 "index": index,
-                "date": game["DATE"],
-                "home": game["HOME"],
-                "away": game["AWAY"],
-                "hscore": game["HSCORE"],
-                "ascore": game["ASCORE"],
+                "date": game[GAME_COLUMN_DATE],
+                "home": game[GAME_COLUMN_HOME],
+                "away": game[GAME_COLUMN_AWAY],
+                "hscore": game[GAME_COLUMN_HOME_SCORE],
+                "ascore": game[GAME_COLUMN_AWAY_SCORE],
             }
         )
     )
