@@ -1,13 +1,14 @@
 # static-elo-rating-NBA
 
+![APM](https://img.shields.io/badge/-Python-F9DC3E.svg?logo=python&style=flat)
+![Editor](https://img.shields.io/badge/-Visual%20Studio%20Code-007ACC.svg?logo=visual-studio-code&style=flat)
 ![AUR last modified](https://img.shields.io/aur/last-modified/google-chrome)
 
 NBAのシーズンを通してK因子固定のElo-rating
 
 ## DEMO
 
-![APM](https://img.shields.io/badge/-Python-F9DC3E.svg?logo=python&style=flat)
-![Editor](https://img.shields.io/badge/-Visual%20Studio%20Code-007ACC.svg?logo=visual-studio-code&style=flat)
+
 ![demo](https://user-images.githubusercontent.com/58053010/210120770-13510656-2ba2-42e6-83a9-1f00b2468ed9.gif)
 
 ## Features
