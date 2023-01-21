@@ -97,7 +97,7 @@ python main.py [season] [K-factor]
 ├── main.py
 ├── output # 出力ファイルのディレクトリ
 ├── requirements.txt
-├── staticelo # アプリケーションフォルダ
+└── staticelo # アプリケーションフォルダ
     ├── controller
     │   └── calc.py
     ├── models
