@@ -5,9 +5,9 @@ import termcolor
 
 
 def get_template_dir_path():
-    """テンプレートファイルのディレクトリを返します
+    """テンプレートファイルのディレクトリパスを返します
     Returns:
-        str: テンプレートファイルのディレクトリを返します
+        str: テンプレートファイルのディレクトリパスを返します
     """
     template_dir_path = None
     try:
