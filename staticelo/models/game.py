@@ -35,7 +35,7 @@ class Game(object):
     def get_csv_file_path(self):
         """csvファイルのパスを作成
         Return:
-            str: csvファイルのパスを返すs
+            str: csvファイルのパスを返す
         """
         filename = self.season + ".csv"
         csv_file_path = os.path.join(INPUT_DIR, filename)
@@ -44,7 +44,7 @@ class Game(object):
             raise NoInputfileError("Could not find {}".format(csv_file_path))
 
         return csv_file_path
-    
+
     def load_data(self):
         """csvファイルのデータを読み込みます
         Retuerns:
