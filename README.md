@@ -3,7 +3,9 @@
 ![APM](https://img.shields.io/badge/-Python-F9DC3E.svg?logo=python&style=flat)
 ![Editor](https://img.shields.io/badge/-Visual%20Studio%20Code-007ACC.svg?logo=visual-studio-code&style=flat)
 
-NBA のシーズンを通して K 因子固定の Elo-rating
+NBA のシーズンを通して K 因子固定の Elo-rating．
+
+ **当リポジトリで命名している`Static Elo-rating`は一般的に単に`Elo-rating`と呼ばれることが多く，私が命名した`Static Elo-rating`という名前自体は汎用的な名称ではないことに注意してください．**
 
 ## DEMO
 
@@ -23,7 +25,7 @@ $$r^{\prime} = r + K (S -\mu)$$
 - $S$ : プレイヤーの最近の成績
 - $\mu$ : レイティングの平均
 
-Elo はもともと $K=10$ としていた．この更新式は各プレイヤーに対するレイティングが一旦確率されれたとき，そのレイティングを上下させるには，そのプレイヤーの成績がリーグ全体の平均からどの程度上下するかだけに依るとしている．
+Elo はもともと $K=10$ としていた．この更新式は各プレイヤーに対するレイティングが一旦確立されれたとき，そのレイティングを上下させるには，そのプレイヤーの成績がリーグ全体の平均からどの程度上下するかだけに依るとしている．
 
 ### K-factor
 
