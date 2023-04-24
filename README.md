@@ -44,8 +44,8 @@ $$
 S_{ij} =
             \begin{cases}
                 1   & i\text{が}j\text{に勝った場合}   \\
-                0   & i\text{と}j\text{引き分けた場合} \\
-                1/2 & i\text{が}j\text{に負けた場合}
+                0   & i\text{が}j\text{に負けた場合}  \\
+                1/2 & i\text{と}j\text{引き分けた場合}
             \end{cases}
 $$
 
