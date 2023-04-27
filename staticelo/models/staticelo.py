@@ -6,7 +6,6 @@ from staticelo.models.team import Team
 
 from staticelo.views import console
 
-from staticelo.settings import TEAMS
 from staticelo.settings import (
     GAME_COLUMN_HOME,
     GAME_COLUMN_AWAY,
